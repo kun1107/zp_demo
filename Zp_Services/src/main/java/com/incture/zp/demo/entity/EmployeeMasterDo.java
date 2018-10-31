@@ -25,7 +25,7 @@ public class EmployeeMasterDo implements BaseDo {
 	@Column(name = "USER_NAME")
 	private String userName;
 	
-	@Column(name = "EMP_ID")
+	@Column(name = "EMP_PASSWORD")
 	private String password;
 	
 	@Column(name = "FIRST_NAME")
@@ -49,7 +49,7 @@ public class EmployeeMasterDo implements BaseDo {
 	@Column(name = "POSITION")
 	private String position;
 	
-	@Column(name = "DIVISION")
+	@Column(name = "CONTACT_NO")
 	private String contactNo;
 	
 	@Column(name = "COUNTRY")
