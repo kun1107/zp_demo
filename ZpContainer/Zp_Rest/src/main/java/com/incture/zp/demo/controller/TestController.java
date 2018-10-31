@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.incture.delfi.dto.ResponseDto;
+import com.incture.zp.demo.dto.ResponseDto;
 
 @RestController
 @ComponentScan("com.incture.zp.demo")

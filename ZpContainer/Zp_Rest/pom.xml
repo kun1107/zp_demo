@@ -74,9 +74,9 @@
 		<!-- dependency> <groupId>com.fasterxml.jackson.dataformat</groupId> <artifactId>jackson-dataformat-xml</artifactId> 
 			<version>${jackson.library}</version> </dependency -->
 		<dependency>
-			<groupId>com.incture.delfi</groupId>
-			<artifactId>DelfiSO_Services</artifactId>
-			<version>1</version>
+			<groupId>Zp_Services</groupId>
+			<artifactId>Zp_Services</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<!-- <dependency>
 			<groupId>com.incture.delfi</groupId>

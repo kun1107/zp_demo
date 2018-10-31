@@ -5,6 +5,9 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
+        <dependent-module archiveName="Zp_Services-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Zp_Services/Zp_Services">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="Zp_Rest"/>
         <property name="java-output-path" value="/Zp_Rest/target/classes"/>
     </wb-module>
