@@ -34,4 +34,9 @@ public class TravelRestController {
 	public ResponseDto getTravelById(@PathVariable("travelId") String travelId) {
 		return service.getTravelById(travelId);
 	}
+	
+	@RequestMapping(value="/getTravelByEmpId/{empId}", method = RequestMethod.GET)
+	public ResponseDto getTravelByEmpId(@PathVariable("empId") String empId) {
+		return service.getTravelByEmpId(empId);
+	}
 }

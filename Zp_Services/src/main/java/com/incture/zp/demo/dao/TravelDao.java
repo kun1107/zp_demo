@@ -1,5 +1,8 @@
 package com.incture.zp.demo.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
@@ -114,5 +117,19 @@ public class TravelDao extends BaseDao<TravelDo, TravelDto> implements TravelDao
 		dto = exportDto((TravelDo)q.uniqueResult());
 		
 		return dto;
+	}
+	
+	@Override
+	public List<TravelDto> getTravelByEmpId(String empId){
+		List<TravelDto> travelDtoList = new ArrayList<>();
+		List<TravelDo> travelDoList;
+		String query = "from TravelDo t where t.employeeId=:empId";
+		Query q = getSession().createQuery(query);
+		q.setParameter("employeeId", empId);
+		travelDoList = q.list();
+		for(TravelDo t : travelDoList){
+			travelDtoList.add(exportDto(t));
+		}
+		return travelDtoList;
 	}
 }

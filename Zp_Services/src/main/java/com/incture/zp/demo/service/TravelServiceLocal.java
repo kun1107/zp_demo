@@ -11,4 +11,6 @@ public interface TravelServiceLocal {
 
 	ResponseDto getTravelById(String travelId);
 
+	ResponseDto getTravelByEmpId(String empId);
+
 }
