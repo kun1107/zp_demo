@@ -21,6 +21,7 @@ public class TravelDao extends BaseDao<TravelDo, TravelDto> implements TravelDao
 		entity = new TravelDo();
 		
 		entity.setTravelId(dto.getTravelId());
+		entity.setEmployeeId(dto.getEmployeeId());
 		entity.setAdditionalInformation(dto.getAdditionalInformation());
 		entity.setApprovalStatus(dto.getApprovalStatus());
 		entity.setApproverComment(dto.getApproverComment());
@@ -53,6 +54,7 @@ public class TravelDao extends BaseDao<TravelDo, TravelDto> implements TravelDao
 		dto = new TravelDto();
 		
 		dto.setTravelId(entity.getTravelId());
+		dto.setEmployeeId(entity.getEmployeeId());
 		dto.setAdditionalInformation(entity.getAdditionalInformation());
 		dto.setApprovalStatus(entity.getApprovalStatus());
 		dto.setApproverComment(entity.getApproverComment());
@@ -81,7 +83,7 @@ public class TravelDao extends BaseDao<TravelDo, TravelDto> implements TravelDao
 	}
 
 	@Override
-	public void createTravel(TravelDto dto){
+	public String createTravel(TravelDto dto){
 		sequenceNumberGen = SequenceNumberGen.getInstance();
 		String travelId = sequenceNumberGen.getNextSeqNumber("T", 10, getSession());
 		dto.setTravelId(travelId);
@@ -91,6 +93,8 @@ public class TravelDao extends BaseDao<TravelDo, TravelDto> implements TravelDao
 		dto.setPendingWith("Approver1");
 		
 		getSession().persist(importDto(dto));
+		
+		return travelId;
 	}
 	
 	@Override

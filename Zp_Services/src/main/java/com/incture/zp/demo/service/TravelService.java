@@ -22,7 +22,7 @@ public class TravelService implements TravelServiceLocal{
 	public ResponseDto createTravel(TravelDto dto){
 		responseDto = new ResponseDto();
 		try {
-			dao.createTravel(dto);
+			responseDto.setData(dao.createTravel(dto));
 			responseDto.setCode(200);
 			responseDto.setStatus(true);
 			responseDto.setMessage("Succcess");

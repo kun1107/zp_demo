@@ -29,6 +29,9 @@ public class TravelDo implements BaseDo {
 	@Column(name = "REQUEST_POLICY")
 	private String requestPolicy;
 	
+	@Column(name = "EMP_ID")
+	private String employeeId;
+	
 	@Column(name = "COST_CENTRE_CODE")
 	private String costCentreCode;
 	

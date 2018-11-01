@@ -15,6 +15,8 @@ public class TravelDto extends BaseDto {
 	private String travelId;
 
 	private String requestPolicy;
+	
+	private String employeeId;
 
 	private String costCentreCode;
 

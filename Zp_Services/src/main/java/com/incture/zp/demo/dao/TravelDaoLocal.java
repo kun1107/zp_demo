@@ -4,7 +4,7 @@ import com.incture.zp.demo.dto.TravelDto;
 
 public interface TravelDaoLocal {
 
-	void createTravel(TravelDto dto);
+	String createTravel(TravelDto dto);
 
 	void deleteTravel(String travelId);
 
