@@ -19,17 +19,17 @@ public class CountryProductMasterDo implements BaseDo {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@Column(name = "PRODUCT_GROUP_CODE")
-	private String productGroupCode;
-	
-	@Column(name = "PRODUCT_GROUP_NAME")
-	private String productGroupName;
-	
 	@Column(name = "PRODUCT_SKU_CODE")
 	private String productSkuCode;
 	
 	@Column(name = "PRODUCT_SKU_NAME")
 	private String productSkuName;
+	
+	@Column(name = "PRODUCT_GROUP_CODE")
+	private String productGroupCode;
+	
+	@Column(name = "PRODUCT_GROUP_NAME")
+	private String productGroupName;
 	
 	@Column(name = "COST_CENTER")
 	private String costCenter;
