@@ -1,5 +1,6 @@
 package com.incture.zp.demo.dao;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,18 +13,20 @@ import com.incture.zp.demo.entity.TravelDo;
 import com.incture.zp.demo.util.SequenceNumberGen;
 
 @Repository("TravelDao")
-public class TravelDao extends BaseDao<TravelDo, TravelDto> implements TravelDaoLocal{
+public class TravelDao extends BaseDao<TravelDo, TravelDto> implements TravelDaoLocal {
 
 	private TravelDo entity;
 	private TravelDto dto;
-	
+
 	private SequenceNumberGen sequenceNumberGen;
-	
+
+	private BigDecimal maxEstimatedValue = new BigDecimal("20000.0");
+
 	@Override
 	public TravelDo importDto(TravelDto dto) {
 		// TODO Auto-generated method stub
 		entity = new TravelDo();
-		
+
 		entity.setTravelId(dto.getTravelId());
 		entity.setEmployeeId(dto.getEmployeeId());
 		entity.setAdditionalInformation(dto.getAdditionalInformation());
@@ -49,6 +52,11 @@ public class TravelDao extends BaseDao<TravelDo, TravelDto> implements TravelDao
 		entity.setTravellerType(dto.getTravellerType());
 		entity.setTripDescription(dto.getTripDescription());
 		entity.setTripPurpose(dto.getTripPurpose());
+		entity.setEstimatedCost(dto.getEstimatedCost());
+		entity.setEstimatedCostCurrency(dto.getEstimatedCostCurrency());
+		entity.setProjectName(dto.getProjectName());
+		entity.setSkuCode(dto.getSkuCode());
+
 		return entity;
 	}
 
@@ -56,7 +64,7 @@ public class TravelDao extends BaseDao<TravelDo, TravelDto> implements TravelDao
 	public TravelDto exportDto(TravelDo entity) {
 		// TODO Auto-generated method stub
 		dto = new TravelDto();
-		
+
 		dto.setTravelId(entity.getTravelId());
 		dto.setEmployeeId(entity.getEmployeeId());
 		dto.setAdditionalInformation(entity.getAdditionalInformation());
@@ -82,54 +90,58 @@ public class TravelDao extends BaseDao<TravelDo, TravelDto> implements TravelDao
 		dto.setTravellerType(entity.getTravellerType());
 		dto.setTripDescription(entity.getTripDescription());
 		dto.setTripPurpose(entity.getTripPurpose());
-		
+		dto.setEstimatedCost(entity.getEstimatedCost());
+		dto.setEstimatedCostCurrency(entity.getEstimatedCostCurrency());
+		dto.setProjectName(entity.getProjectName());
+		dto.setSkuCode(entity.getSkuCode());
+
 		return dto;
 	}
 
 	@Override
-	public String createTravel(TravelDto dto){
+	public String createTravel(TravelDto dto) {
 		sequenceNumberGen = SequenceNumberGen.getInstance();
 		String travelId = sequenceNumberGen.getNextSeqNumber("T", 10, getSession());
 		dto.setTravelId(travelId);
-		
-		//should be replaced by workflow
+
+		// should be replaced by workflow
 		dto.setApprovalStatus("Pending");
-		dto.setPendingWith("Approver1");
-		
+		dto.setPendingWith("APL8553");
+
 		getSession().persist(importDto(dto));
-		
+
 		return travelId;
 	}
-	
+
 	@Override
-	public void deleteTravel(String travelId){
+	public void deleteTravel(String travelId) {
 		dto = new TravelDto();
 		dto.setTravelId(travelId);
 		getSession().delete(importDto(dto));
 	}
-	
+
 	@Override
-	public TravelDto getTravelById(String travelId){
+	public TravelDto getTravelById(String travelId) {
 		String query = "from TravelDo t where t.travelId=:travelId";
 		Query q = getSession().createQuery(query);
 
 		q.setParameter("travelId", travelId);
-		
-		dto = exportDto((TravelDo)q.uniqueResult());
-		
+
+		dto = exportDto((TravelDo) q.uniqueResult());
+
 		return dto;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<TravelDto> getTravelByEmpId(String empId){
+	public List<TravelDto> getTravelByEmpId(String empId) {
 		List<TravelDto> travelDtoList = new ArrayList<>();
 		List<TravelDo> travelDoList;
 		String query = "from TravelDo t where t.employeeId=:empId";
 		Query q = getSession().createQuery(query);
 		q.setParameter("empId", empId);
 		travelDoList = q.list();
-		for(TravelDo t : travelDoList){
+		for (TravelDo t : travelDoList) {
 			travelDtoList.add(exportDto(t));
 		}
 		return travelDtoList;
@@ -144,7 +156,7 @@ public class TravelDao extends BaseDao<TravelDo, TravelDto> implements TravelDao
 		Query q = getSession().createQuery(query);
 		q.setParameter("empId", empId);
 		travelDoList = q.list();
-		for(TravelDo t : travelDoList){
+		for (TravelDo t : travelDoList) {
 			travelDtoList.add(exportDto(t));
 		}
 		return travelDtoList;
@@ -155,16 +167,40 @@ public class TravelDao extends BaseDao<TravelDo, TravelDto> implements TravelDao
 		String query = "from TravelDo t where t.travelId =: travelId";
 		Query q = getSession().createQuery(query);
 		q.setParameter("travelId", dto.getTravelId());
-		
-		entity=(TravelDo)q.uniqueResult();
-		
-		entity.setLastApprover(dto.getApprovedBy());
-		entity.setApproverComment(dto.getApproverComment());
-		entity.setPendingWith("Approver2");
-		entity.setApprovalStatus("Pending");
-		
+
+		entity = (TravelDo) q.uniqueResult();
+
+		if (dto.isApproved() && entity.getEstimatedCost().compareTo(maxEstimatedValue) == 1) {
+			if (dto.getApprovedBy() == "APL8553") {
+				entity.setLastApprover(dto.getApprovedBy());
+				entity.setApproverComment(dto.getApproverComment());
+				entity.setPendingWith("8978");
+				entity.setApprovalStatus("Pending");
+			} else if (dto.getApprovedBy() == "8978") {
+				entity.setLastApprover(dto.getApprovedBy());
+				entity.setApproverComment(dto.getApproverComment());
+				entity.setPendingWith("99098");
+				entity.setApprovalStatus("Pending");
+			} else {
+				entity.setLastApprover(dto.getApprovedBy());
+				entity.setApproverComment(dto.getApproverComment());
+				entity.setPendingWith(null);
+				entity.setApprovalStatus("Approved");
+			}
+		} else if (dto.isApproved() && entity.getEstimatedCost().compareTo(maxEstimatedValue) <= 0) {
+			entity.setLastApprover(dto.getApprovedBy());
+			entity.setApproverComment(dto.getApproverComment());
+			entity.setPendingWith(null);
+			entity.setApprovalStatus("Approved");
+		} else {
+			entity.setLastApprover(dto.getApprovedBy());
+			entity.setApproverComment(dto.getApproverComment());
+			entity.setPendingWith(null);
+			entity.setApprovalStatus("Rejected");
+		}
+
 		getSession().update(entity);
-		
+
 		return "successfully updated";
 	}
 }

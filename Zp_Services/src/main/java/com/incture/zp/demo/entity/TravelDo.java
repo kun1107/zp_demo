@@ -88,6 +88,18 @@ public class TravelDo implements BaseDo {
 	
 	@Column(name = "CASH_ADVANCE_COMMENT")
 	private String cashAdvanceComment;
+	
+	@Column(name = "ESTIMATED_COST")
+	private BigDecimal estimatedCost;
+	
+	@Column(name = "ESTIMATED_COST_CURRENCY")
+	private String estimatedCostCurrency;
+	
+	@Column(name = "PROJECT_NAME")
+	private String projectName;
+	
+	@Column(name = "SKU_CODE")
+	private String skuCode;
 
 	@Column(name = "APPROVAL_STATUS")
 	private String approvalStatus;

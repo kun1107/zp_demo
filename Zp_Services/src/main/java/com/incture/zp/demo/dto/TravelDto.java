@@ -53,6 +53,14 @@ public class TravelDto extends BaseDto {
 	private String corporateCreditCardCurrency;
 
 	private String cashAdvanceComment;
+	
+	private BigDecimal estimatedCost;
+	
+	private String estimatedCostCurrency;
+	
+	private String projectName;
+	
+	private String skuCode;
 
 	private String approvalStatus;
 
