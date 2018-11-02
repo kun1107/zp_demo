@@ -119,13 +119,14 @@ public class TravelDao extends BaseDao<TravelDo, TravelDto> implements TravelDao
 		return dto;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TravelDto> getTravelByEmpId(String empId){
 		List<TravelDto> travelDtoList = new ArrayList<>();
 		List<TravelDo> travelDoList;
 		String query = "from TravelDo t where t.employeeId=:empId";
 		Query q = getSession().createQuery(query);
-		q.setParameter("employeeId", empId);
+		q.setParameter("empId", empId);
 		travelDoList = q.list();
 		for(TravelDo t : travelDoList){
 			travelDtoList.add(exportDto(t));

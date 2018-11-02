@@ -72,6 +72,7 @@ public class TravelService implements TravelServiceLocal{
 	
 	@Override
 	public ResponseDto getTravelByEmpId(String empId){
+		responseDto = new ResponseDto();
 		try {
 			responseDto.setData(dao.getTravelByEmpId(empId));;
 			responseDto.setCode(200);
