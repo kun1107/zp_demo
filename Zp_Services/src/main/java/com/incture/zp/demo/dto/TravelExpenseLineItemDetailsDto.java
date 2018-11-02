@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import com.incture.zp.demo.entity.TravelExpenseAttendeesDo;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -47,7 +45,7 @@ private Long expenseLineItemId;
 	
 	private String comments;
 	
-	private List<TravelExpenseAttendeesDo> listOfAttendees;
+	private List<TravelExpenseAttendeesDto> listOfAttendees;
 	
 	@Override
 	public Object getPrimaryKey() {
