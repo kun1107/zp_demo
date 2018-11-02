@@ -13,6 +13,6 @@ import lombok.ToString;
 public class ApprovalDto {
 	private String approverComment;
 	private String approvedBy;
-	private boolean isApproved;
+	private boolean approved;
 	private String travelId; 
 }

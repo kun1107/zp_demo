@@ -164,19 +164,19 @@ public class TravelDao extends BaseDao<TravelDo, TravelDto> implements TravelDao
 
 	@Override
 	public String approval(ApprovalDto dto) {
-		String query = "from TravelDo t where t.travelId =: travelId";
+		String query = "from TravelDo t where t.travelId =:travelId";
 		Query q = getSession().createQuery(query);
 		q.setParameter("travelId", dto.getTravelId());
 
 		entity = (TravelDo) q.uniqueResult();
 
 		if (dto.isApproved() && entity.getEstimatedCost().compareTo(maxEstimatedValue) == 1) {
-			if (dto.getApprovedBy() == "APL8553") {
+			if (dto.getApprovedBy().equals("APL8553")) {
 				entity.setLastApprover(dto.getApprovedBy());
 				entity.setApproverComment(dto.getApproverComment());
 				entity.setPendingWith("8978");
 				entity.setApprovalStatus("Pending");
-			} else if (dto.getApprovedBy() == "8978") {
+			} else if (dto.getApprovedBy().equals("8978")) {
 				entity.setLastApprover(dto.getApprovedBy());
 				entity.setApproverComment(dto.getApproverComment());
 				entity.setPendingWith("99098");
