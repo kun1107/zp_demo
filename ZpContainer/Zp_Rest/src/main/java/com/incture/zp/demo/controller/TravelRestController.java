@@ -22,7 +22,7 @@ public class TravelRestController {
 	private TravelServiceLocal service;
 	
 	@RequestMapping( method = RequestMethod.POST)
-	public ResponseDto getAllEmployeeDetails(@RequestBody TravelDto dto) {
+	public ResponseDto createTravel(@RequestBody TravelDto dto) {
 		return service.createTravel(dto);
 	}
 
