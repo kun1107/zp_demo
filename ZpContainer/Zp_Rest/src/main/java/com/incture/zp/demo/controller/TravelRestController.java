@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.incture.zp.demo.dto.ApprovalDto;
 import com.incture.zp.demo.dto.ResponseDto;
 import com.incture.zp.demo.dto.TravelDto;
 import com.incture.zp.demo.service.TravelServiceLocal;
@@ -45,4 +46,9 @@ public class TravelRestController {
 		return service.getPendingApproval(empId);
 	}
 	
+	@RequestMapping(value="/approval", method = RequestMethod.POST)
+	public ResponseDto approval(@RequestBody ApprovalDto dto) {
+		return service.approval(dto);
+	}
+
 }

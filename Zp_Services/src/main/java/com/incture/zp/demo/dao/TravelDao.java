@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
+import com.incture.zp.demo.dto.ApprovalDto;
 import com.incture.zp.demo.dto.TravelDto;
 import com.incture.zp.demo.entity.TravelDo;
 import com.incture.zp.demo.util.SequenceNumberGen;
@@ -147,5 +148,23 @@ public class TravelDao extends BaseDao<TravelDo, TravelDto> implements TravelDao
 			travelDtoList.add(exportDto(t));
 		}
 		return travelDtoList;
+	}
+
+	@Override
+	public String approval(ApprovalDto dto) {
+		String query = "from TravelDo t where t.travelId =: travelId";
+		Query q = getSession().createQuery(query);
+		q.setParameter("travelId", dto.getTravelId());
+		
+		entity=(TravelDo)q.uniqueResult();
+		
+		entity.setLastApprover(dto.getApprovedBy());
+		entity.setApproverComment(dto.getApproverComment());
+		entity.setPendingWith("Approver2");
+		entity.setApprovalStatus("Pending");
+		
+		getSession().update(entity);
+		
+		return "successfully updated";
 	}
 }
