@@ -203,4 +203,19 @@ public class TravelDao extends BaseDao<TravelDo, TravelDto> implements TravelDao
 
 		return "successfully updated";
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TravelDto> getApprovedTravels(String empId){
+		List<TravelDto> travelDtoList = new ArrayList<>();
+		List<TravelDo> travelDoList;
+		String query = "from TravelDo t where t.employeeId=:empId and t.approvalStatus = 'Approved'";
+		Query q = getSession().createQuery(query);
+		q.setParameter("empId", empId);
+		travelDoList = q.list();
+		for (TravelDo t : travelDoList) {
+			travelDtoList.add(exportDto(t));
+		}
+		return travelDtoList;
+	}
 }

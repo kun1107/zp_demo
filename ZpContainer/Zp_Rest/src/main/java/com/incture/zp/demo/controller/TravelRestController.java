@@ -51,4 +51,8 @@ public class TravelRestController {
 		return service.approval(dto);
 	}
 
+	@RequestMapping(value="/getApprovedTravels/{empId}", method = RequestMethod.GET)
+	public ResponseDto getApprovedTravels(@PathVariable("empId") String empId) {
+		return service.getApprovedTravels(empId);
+	}
 }

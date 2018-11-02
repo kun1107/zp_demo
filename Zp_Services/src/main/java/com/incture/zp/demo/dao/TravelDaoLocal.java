@@ -19,4 +19,6 @@ public interface TravelDaoLocal {
 
 	String approval(ApprovalDto dto);
 
+	List<TravelDto> getApprovedTravels(String empId);
+
 }

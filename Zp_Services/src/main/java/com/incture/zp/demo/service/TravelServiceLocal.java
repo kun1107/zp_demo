@@ -18,4 +18,6 @@ public interface TravelServiceLocal {
 
 	ResponseDto approval(ApprovalDto dto);
 
+	ResponseDto getApprovedTravels(String empId);
+
 }

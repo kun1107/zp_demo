@@ -121,5 +121,22 @@ public class TravelService implements TravelServiceLocal{
 		}
 		return responseDto;
 	}
+	
+	@Override
+	public ResponseDto getApprovedTravels(String empId){
+		responseDto = new ResponseDto();
+		try {
+			responseDto.setData(dao.getApprovedTravels(empId));;
+			responseDto.setCode(200);
+			responseDto.setStatus(true);
+			responseDto.setMessage("Succcess");
+
+		} catch (Exception e) {
+			responseDto.setCode(500);
+			responseDto.setStatus(false);
+			responseDto.setMessage("failed due to: " + e.getMessage());
+		}
+		return responseDto;
+	}
 }
 
