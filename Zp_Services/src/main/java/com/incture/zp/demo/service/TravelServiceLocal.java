@@ -13,4 +13,6 @@ public interface TravelServiceLocal {
 
 	ResponseDto getTravelByEmpId(String empId);
 
+	ResponseDto getPendingApproval(String empId);
+
 }

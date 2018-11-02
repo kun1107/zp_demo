@@ -132,4 +132,19 @@ public class TravelDao extends BaseDao<TravelDo, TravelDto> implements TravelDao
 		}
 		return travelDtoList;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TravelDto> getPendingApproval(String empId) {
+		List<TravelDto> travelDtoList = new ArrayList<>();
+		List<TravelDo> travelDoList;
+		String query = "from TravelDo t where t.approvalStatus = 'Pending' and t.pendingWith =:empId";
+		Query q = getSession().createQuery(query);
+		q.setParameter("empId", empId);
+		travelDoList = q.list();
+		for(TravelDo t : travelDoList){
+			travelDtoList.add(exportDto(t));
+		}
+		return travelDtoList;
+	}
 }

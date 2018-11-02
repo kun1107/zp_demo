@@ -14,4 +14,6 @@ public interface TravelDaoLocal {
 
 	List<TravelDto> getTravelByEmpId(String empId);
 
+	List<TravelDto> getPendingApproval(String empId);
+
 }

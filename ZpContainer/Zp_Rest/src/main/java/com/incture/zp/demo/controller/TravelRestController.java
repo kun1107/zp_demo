@@ -39,4 +39,10 @@ public class TravelRestController {
 	public ResponseDto getTravelByEmpId(@PathVariable("empId") String empId) {
 		return service.getTravelByEmpId(empId);
 	}
+	
+	@RequestMapping(value="/getPendingApproval/{empId}", method = RequestMethod.GET)
+	public ResponseDto getPendingApproval(@PathVariable("empId") String empId) {
+		return service.getPendingApproval(empId);
+	}
+	
 }
