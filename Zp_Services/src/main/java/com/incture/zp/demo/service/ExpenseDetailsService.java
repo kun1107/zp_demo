@@ -1,6 +1,5 @@
 package com.incture.zp.demo.service;
 
-import javax.jws.Oneway;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,5 +1,6 @@
 package com.incture.zp.demo.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -43,6 +44,9 @@ public class TravelExpenseAttendeesDo implements BaseDo{
 	@Column(name = "DATE")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;
+	
+	@Column(name = "AMOUNT")
+	private BigDecimal amount;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "EXPENSE_LINE_ITEM_ID", nullable = true, updatable = true)

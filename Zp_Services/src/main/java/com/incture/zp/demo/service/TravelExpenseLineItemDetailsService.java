@@ -36,4 +36,22 @@ public class TravelExpenseLineItemDetailsService implements TravelExpenseLineIte
 		}
 		return responseDto;
 	}
+
+
+	@Override
+	public ResponseDto getExpenseLineItem(String expenseLineItemId) {
+		responseDto = new ResponseDto();
+		try {
+			responseDto.setData(dao.getExpenseLineItem(expenseLineItemId));
+			responseDto.setCode(200);
+			responseDto.setStatus(true);
+			responseDto.setMessage("Succcess");
+
+		} catch (Exception e) {
+			responseDto.setCode(500);
+			responseDto.setStatus(false);
+			responseDto.setMessage("failed due to: " + e.getMessage());
+		}
+		return responseDto;
+	}
 }

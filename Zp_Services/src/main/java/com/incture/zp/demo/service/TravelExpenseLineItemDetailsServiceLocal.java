@@ -7,4 +7,6 @@ public interface TravelExpenseLineItemDetailsServiceLocal {
 
 	ResponseDto createLineItem(TravelExpenseLineItemDetailsDto dto);
 
+	ResponseDto getExpenseLineItem(String expenseLineItemId);
+
 }

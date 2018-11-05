@@ -1,5 +1,6 @@
 package com.incture.zp.demo.dto;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import lombok.Getter;
@@ -22,6 +23,8 @@ public class TravelExpenseAttendeesDto extends BaseDto{
 	private String department;
 	
 	private Date date;
+	
+	private BigDecimal amount;
 
 	@Override
 	public Object getPrimaryKey() {

@@ -20,6 +20,7 @@ public class TravelExpenseAttendeesDao implements TravelExpenseAttendeesDaoLocal
 		entity.setDate(dto.getDate());
 		entity.setDepartment(dto.getDepartment());
 		entity.setName(dto.getName());
+		entity.setAmount(dto.getAmount());
 		
 		return entity;
 	}
@@ -34,6 +35,7 @@ public class TravelExpenseAttendeesDao implements TravelExpenseAttendeesDaoLocal
 		dto.setDate(entity.getDate());
 		dto.setDepartment(entity.getDepartment());
 		dto.setName(entity.getName());
+		dto.setAmount(entity.getAmount());
 		
 		return dto;
 	}

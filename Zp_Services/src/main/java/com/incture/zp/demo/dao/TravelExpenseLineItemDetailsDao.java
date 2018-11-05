@@ -3,6 +3,7 @@ package com.incture.zp.demo.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
 import com.incture.zp.demo.dto.TravelExpenseAttendeesDto;
@@ -52,6 +53,7 @@ public class TravelExpenseLineItemDetailsDao extends BaseDao<TravelExpenseLineIt
 			attendeesDo.setDate(attendeesDto.getDate());
 			attendeesDo.setDepartment(attendeesDto.getDepartment());
 			attendeesDo.setName(attendeesDto.getName());
+			attendeesDo.setAmount(dto.getAmount());
 			
 			listOfAttendees.add(attendeesDo);
 		}
@@ -92,6 +94,7 @@ public class TravelExpenseLineItemDetailsDao extends BaseDao<TravelExpenseLineIt
 			attendeesDto.setDate(attendeesDo.getDate());
 			attendeesDto.setDepartment(attendeesDo.getDepartment());
 			attendeesDto.setName(attendeesDo.getName());
+			attendeesDto.setAmount(attendeesDo.getAmount());
 			
 			attendeesDtolist.add(attendeesDto);
 		}
@@ -112,5 +115,17 @@ public class TravelExpenseLineItemDetailsDao extends BaseDao<TravelExpenseLineIt
 		
 		getSession().persist(importDto(dto));
 		return expenseLineItemId;
+	}
+
+	@Override
+	public TravelExpenseLineItemDetailsDto getExpenseLineItem(String expenseLineItemId) {
+		String query = "from TravelExpenseLineItemDetailsDo t where t.expenseLineItemId=:expenseLineItemId";
+		Query q = getSession().createQuery(query);
+
+		q.setParameter("expenseLineItemId", expenseLineItemId);
+
+		dto = exportDto((TravelExpenseLineItemDetailsDo) q.uniqueResult());
+
+		return dto;
 	}
 }

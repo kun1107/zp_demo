@@ -6,4 +6,6 @@ public interface TravelExpenseLineItemDetailsDaoLocal {
 
 	String createLineItem(TravelExpenseLineItemDetailsDto dto);
 
+	TravelExpenseLineItemDetailsDto getExpenseLineItem(String expenseLineItemId);
+
 }
