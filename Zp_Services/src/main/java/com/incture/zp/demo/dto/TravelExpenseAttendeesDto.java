@@ -11,7 +11,7 @@ import lombok.ToString;
 @ToString
 public class TravelExpenseAttendeesDto extends BaseDto{
 
-	private Long attendeesId;
+	private String attendeesId;
 	
 	private String attendeeType;
 	

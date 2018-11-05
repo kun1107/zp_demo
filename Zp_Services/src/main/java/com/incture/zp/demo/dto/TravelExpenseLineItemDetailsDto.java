@@ -13,40 +13,40 @@ import lombok.ToString;
 @ToString
 public class TravelExpenseLineItemDetailsDto extends BaseDto {
 
-private Long expenseLineItemId;
-	
+	private String expenseLineItemId;
+
 	private String expenseType;
-	
+
 	private String department;
-	
+
 	private Date transactionDate;
-	
+
 	private String businessPurpose;
-	
+
 	private BigDecimal amount;
-	
+
 	private String amountCurrency;
-	
+
 	private BigDecimal tax;
-	
+
 	private String taxCurrency;
-	
+
 	private String vendor;
-	
+
 	private String vendorAddress;
-	
+
 	private String vendorTin;
-	
+
 	private String paymentType;
-	
+
 	private String costCentreName;
-	
+
 	private BigDecimal approvedAmount;
-	
+
 	private String comments;
-	
+
 	private List<TravelExpenseAttendeesDto> listOfAttendees;
-	
+
 	@Override
 	public Object getPrimaryKey() {
 		// TODO Auto-generated method stub

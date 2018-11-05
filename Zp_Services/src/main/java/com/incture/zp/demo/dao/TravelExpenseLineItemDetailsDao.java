@@ -9,17 +9,22 @@ import com.incture.zp.demo.dto.TravelExpenseAttendeesDto;
 import com.incture.zp.demo.dto.TravelExpenseLineItemDetailsDto;
 import com.incture.zp.demo.entity.TravelExpenseAttendeesDo;
 import com.incture.zp.demo.entity.TravelExpenseLineItemDetailsDo;
+import com.incture.zp.demo.util.SequenceNumberGen;
 
 @Repository("TravelExpenseLineItemDetailsDao")
-public class TravelExpenseLineItemDetailsDao implements TravelExpenseLineItemDetailsDaoLocal{
+public class TravelExpenseLineItemDetailsDao extends BaseDao<TravelExpenseLineItemDetailsDo, TravelExpenseLineItemDetailsDto> implements TravelExpenseLineItemDetailsDaoLocal{
 
 	private TravelExpenseLineItemDetailsDto dto;
 	private TravelExpenseLineItemDetailsDo entity;
+	
+
+	private SequenceNumberGen sequenceNumberGen;
 	
 	@Override
 	public TravelExpenseLineItemDetailsDo importDto(TravelExpenseLineItemDetailsDto dto){
 		entity = new TravelExpenseLineItemDetailsDo();
 		
+		entity.setExpenseLineItemId(dto.getExpenseLineItemId());
 		entity.setAmount(dto.getAmount());
 		entity.setAmountCurrency(dto.getAmountCurrency());
 		entity.setApprovedAmount(dto.getApprovedAmount());
@@ -41,6 +46,7 @@ public class TravelExpenseLineItemDetailsDao implements TravelExpenseLineItemDet
 		for(TravelExpenseAttendeesDto attendeesDto : dto.getListOfAttendees()){
 			attendeesDo = new TravelExpenseAttendeesDo();
 			
+			attendeesDo.setAttendeesId(attendeesDto.getAttendeesId());
 			attendeesDo.setAttendeeTitle(attendeesDto.getAttendeeTitle());
 			attendeesDo.setAttendeeType(attendeesDto.getAttendeeType());
 			attendeesDo.setDate(attendeesDto.getDate());
@@ -92,5 +98,19 @@ public class TravelExpenseLineItemDetailsDao implements TravelExpenseLineItemDet
 		
 		dto.setListOfAttendees(attendeesDtolist);
 		return dto;
+	}
+	
+	@Override
+	public String createLineItem(TravelExpenseLineItemDetailsDto dto){
+		sequenceNumberGen = SequenceNumberGen.getInstance();
+		String expenseLineItemId = sequenceNumberGen.getNextSeqNumber("L", 10, getSession());
+		dto.setExpenseLineItemId(expenseLineItemId);
+		
+		for (TravelExpenseAttendeesDto attendeesDto : dto.getListOfAttendees()) {
+			attendeesDto.setAttendeesId(sequenceNumberGen.getNextSeqNumber("A", 10, getSession()));
+		}
+		
+		getSession().persist(importDto(dto));
+		return expenseLineItemId;
 	}
 }
