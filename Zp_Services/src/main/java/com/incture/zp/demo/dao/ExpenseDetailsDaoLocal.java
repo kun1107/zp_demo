@@ -11,4 +11,6 @@ public interface ExpenseDetailsDaoLocal {
 
 	String createExpenseDetail(ExpenseDetailsDto dto);
 
+	ExpenseDetailsDto getExpenseDetailByEmpId(String employeeId);
+
 }

@@ -1,9 +1,11 @@
 package com.incture.zp.demo.dao;
 
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
 import com.incture.zp.demo.dto.ExpenseDetailsDto;
 import com.incture.zp.demo.entity.ExpenseDetailsDo;
+import com.incture.zp.demo.entity.TravelDo;
 import com.incture.zp.demo.util.SequenceNumberGen;
 
 @Repository("ExpenseDetailsDao")
@@ -19,6 +21,7 @@ public class ExpenseDetailsDao extends BaseDao<ExpenseDetailsDo, ExpenseDetailsD
 		entity = new ExpenseDetailsDo();
 		
 		entity.setExpenseDetailId(dto.getExpenseDetailId());
+		entity.setEmployeeId(dto.getEmployeeId());
 		entity.setClaimName(dto.getClaimName());
 		entity.setClaimDate(dto.getClaimDate());
 		entity.setCostCenterName(dto.getCostCenterName());
@@ -37,6 +40,7 @@ public class ExpenseDetailsDao extends BaseDao<ExpenseDetailsDo, ExpenseDetailsD
 		dto = new ExpenseDetailsDto();
 		
 		dto.setExpenseDetailId(entity.getExpenseDetailId());
+		dto.setEmployeeId(entity.getEmployeeId());
 		dto.setClaimName(entity.getClaimName());
 		dto.setClaimDate(entity.getClaimDate());
 		dto.setCostCenterName(entity.getCostCenterName());
@@ -57,5 +61,17 @@ public class ExpenseDetailsDao extends BaseDao<ExpenseDetailsDo, ExpenseDetailsD
 		dto.setExpenseDetailId(expenseDetailId);
 		getSession().persist(importDto(dto));
 		return expenseDetailId;
+	}
+	
+	@Override
+	public ExpenseDetailsDto getExpenseDetailByEmpId(String employeeId){
+		String query = "from ExpenseDetailsDo e where e.employeeId=:employeeId";
+		Query q = getSession().createQuery(query);
+
+		q.setParameter("employeeId", employeeId);
+
+		dto = exportDto((ExpenseDetailsDo) q.uniqueResult());
+
+		return dto;
 	}
 }

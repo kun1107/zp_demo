@@ -20,6 +20,9 @@ public class ExpenseDetailsDo implements BaseDo{
 	@Column(name = "EXPENSE_DETAIL_ID")
 	private String expenseDetailId;
 	
+	@Column(name = "EMPLOYEE_ID")
+	private String employeeId;
+	
 	@Column(name = "CLAIM_NAME")
 	private String claimName;
 	
