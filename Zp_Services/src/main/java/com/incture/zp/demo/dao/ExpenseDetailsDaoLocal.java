@@ -1,5 +1,7 @@
 package com.incture.zp.demo.dao;
 
+import java.util.List;
+
 import com.incture.zp.demo.dto.ExpenseDetailsDto;
 import com.incture.zp.demo.entity.ExpenseDetailsDo;
 
@@ -9,8 +11,10 @@ public interface ExpenseDetailsDaoLocal {
 
 	ExpenseDetailsDto exportDto(ExpenseDetailsDo entity);
 
-	String createExpenseDetail(ExpenseDetailsDto dto);
+	ExpenseDetailsDto getExpenseDetailByExpenseId(String expenseDetailId);
 
-	ExpenseDetailsDto getExpenseDetailByEmpId(String employeeId);
+	List<ExpenseDetailsDto> getExpenseDetailByEmpId(String employeeId);
+
+	String createExpenseDetail(ExpenseDetailsDto dto);
 
 }

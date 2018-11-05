@@ -7,4 +7,8 @@ public interface ExpenseDetailsServiceLocal {
 
 	ResponseDto createExpenseDetail(ExpenseDetailsDto dto);
 
+	ResponseDto getExpenseDetailByEmpId(String employeeId);
+
+	ResponseDto getExpenseDetailByExpenseId(String expenseDetailId);
+
 }

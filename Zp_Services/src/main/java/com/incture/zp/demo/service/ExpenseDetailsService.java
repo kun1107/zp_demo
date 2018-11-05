@@ -34,4 +34,39 @@ public class ExpenseDetailsService implements ExpenseDetailsServiceLocal{
 		}
 		return responseDto;
 	}
+	
+	@Override
+	public ResponseDto getExpenseDetailByEmpId(String employeeId){
+		responseDto = new ResponseDto();
+		try {
+			responseDto.setData(dao.getExpenseDetailByEmpId(employeeId));
+			responseDto.setCode(200);
+			responseDto.setStatus(true);
+			responseDto.setMessage("Succcess");
+
+		} catch (Exception e) {
+			responseDto.setCode(500);
+			responseDto.setStatus(false);
+			responseDto.setMessage("failed due to: " + e.getMessage());
+		}
+		return responseDto;
+	}
+	
+	@Override
+	public ResponseDto getExpenseDetailByExpenseId(String expenseDetailId){
+		responseDto = new ResponseDto();
+		try {
+			responseDto.setData(dao.getExpenseDetailByExpenseId(expenseDetailId));
+			responseDto.setCode(200);
+			responseDto.setStatus(true);
+			responseDto.setMessage("Succcess");
+
+		} catch (Exception e) {
+			responseDto.setCode(500);
+			responseDto.setStatus(false);
+			responseDto.setMessage("failed due to: " + e.getMessage());
+		}
+		return responseDto;
+	}
+	
 }

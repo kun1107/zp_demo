@@ -1,11 +1,13 @@
 package com.incture.zp.demo.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
 import com.incture.zp.demo.dto.ExpenseDetailsDto;
 import com.incture.zp.demo.entity.ExpenseDetailsDo;
-import com.incture.zp.demo.entity.TravelDo;
 import com.incture.zp.demo.util.SequenceNumberGen;
 
 @Repository("ExpenseDetailsDao")
@@ -63,15 +65,27 @@ public class ExpenseDetailsDao extends BaseDao<ExpenseDetailsDo, ExpenseDetailsD
 		return expenseDetailId;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
-	public ExpenseDetailsDto getExpenseDetailByEmpId(String employeeId){
+	public List<ExpenseDetailsDto> getExpenseDetailByEmpId(String employeeId){
+		List<ExpenseDetailsDto> detailsDtos = new ArrayList<>();
+		List<ExpenseDetailsDo> detailsDos;
 		String query = "from ExpenseDetailsDo e where e.employeeId=:employeeId";
 		Query q = getSession().createQuery(query);
-
 		q.setParameter("employeeId", employeeId);
-
+		detailsDos = q.list();
+		for(ExpenseDetailsDo entity : detailsDos){
+			detailsDtos.add(exportDto(entity));
+		}
+		return detailsDtos;
+	}
+	
+	@Override
+	public ExpenseDetailsDto getExpenseDetailByExpenseId(String expenseDetailId){
+		String query = "from ExpenseDetailsDo e where e.expenseDetailId=:expenseDetailId";
+		Query q = getSession().createQuery(query);
+		q.setParameter("expenseDetailId", expenseDetailId);
 		dto = exportDto((ExpenseDetailsDo) q.uniqueResult());
-
 		return dto;
 	}
 }
