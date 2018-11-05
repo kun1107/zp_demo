@@ -1,6 +1,7 @@
 package com.incture.zp.demo.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,7 +22,8 @@ public class ExpenseDetailsDto extends BaseDto {
 	private String approvalComment;
 	private String approvalStatus;
 	private String pendingWith;
-	private String additionalInfo;
+	private String additionalInfo;	
+	private List<String> listOfLineItemId;
 	
 	@Override
 	public Object getPrimaryKey() {

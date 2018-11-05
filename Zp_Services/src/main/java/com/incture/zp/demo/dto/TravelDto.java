@@ -2,6 +2,7 @@ package com.incture.zp.demo.dto;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -69,6 +70,8 @@ public class TravelDto extends BaseDto {
 	private String lastApprover;
 
 	private String approverComment;
+	
+	private List<String> listOfLineItemId;
 
 	@Override
 	public Object getPrimaryKey() {

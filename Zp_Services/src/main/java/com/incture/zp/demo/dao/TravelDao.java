@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.incture.zp.demo.dto.ApprovalDto;
 import com.incture.zp.demo.dto.TravelDto;
+import com.incture.zp.demo.entity.LineItemRelDo;
 import com.incture.zp.demo.entity.TravelDo;
 import com.incture.zp.demo.util.SequenceNumberGen;
 
@@ -17,6 +19,11 @@ public class TravelDao extends BaseDao<TravelDo, TravelDto> implements TravelDao
 
 	private TravelDo entity;
 	private TravelDto dto;
+	
+	private LineItemRelDo relEntity;
+	
+	@Autowired
+	private LineItemRelDaoLocal relDao;
 
 	private SequenceNumberGen sequenceNumberGen;
 
@@ -108,6 +115,18 @@ public class TravelDao extends BaseDao<TravelDo, TravelDto> implements TravelDao
 		dto.setApprovalStatus("Pending");
 		dto.setPendingWith("APL8553");
 
+		
+		
+		//
+		
+		for ( String relId : dto.getListOfLineItemId()) {
+			relEntity = new LineItemRelDo();
+			
+			relEntity.setParentId(travelId);
+			relEntity.setRelId(relId);
+			
+			relDao.createRelation(relEntity);
+		}
 		getSession().persist(importDto(dto));
 
 		return travelId;

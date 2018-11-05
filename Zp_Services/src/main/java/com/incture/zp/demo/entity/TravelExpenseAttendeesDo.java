@@ -51,6 +51,8 @@ public class TravelExpenseAttendeesDo implements BaseDo{
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "EXPENSE_LINE_ITEM_ID", nullable = true, updatable = true)
 	private TravelExpenseLineItemDetailsDo travelExpenseLineItemDetailsDo;
+	
+	
 	@Override
 	public Object getPrimaryKey() {
 		// TODO Auto-generated method stub

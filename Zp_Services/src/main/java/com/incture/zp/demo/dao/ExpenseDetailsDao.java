@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.incture.zp.demo.dto.ExpenseDetailsDto;
 import com.incture.zp.demo.entity.ExpenseDetailsDo;
+import com.incture.zp.demo.entity.LineItemRelDo;
 import com.incture.zp.demo.util.SequenceNumberGen;
 
 @Repository("ExpenseDetailsDao")
@@ -15,6 +17,11 @@ public class ExpenseDetailsDao extends BaseDao<ExpenseDetailsDo, ExpenseDetailsD
 
 	private ExpenseDetailsDo entity;
 	private ExpenseDetailsDto dto;
+	
+	private LineItemRelDo relEntity;
+	
+	@Autowired
+	private LineItemRelDaoLocal relDao;
 	
 	private SequenceNumberGen sequenceNumberGen;
 	
@@ -61,6 +68,17 @@ public class ExpenseDetailsDao extends BaseDao<ExpenseDetailsDo, ExpenseDetailsD
 		sequenceNumberGen = SequenceNumberGen.getInstance();
 		String expenseDetailId = sequenceNumberGen.getNextSeqNumber("E", 10, getSession());
 		dto.setExpenseDetailId(expenseDetailId);
+		
+		
+		for ( String relId : dto.getListOfLineItemId()) {
+			relEntity = new LineItemRelDo();
+			
+			relEntity.setParentId(expenseDetailId);
+			relEntity.setRelId(relId);
+			
+			relDao.createRelation(relEntity);
+		}
+		
 		getSession().persist(importDto(dto));
 		return expenseDetailId;
 	}

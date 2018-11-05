@@ -112,7 +112,6 @@ public class TravelExpenseLineItemDetailsDao extends BaseDao<TravelExpenseLineIt
 		for (TravelExpenseAttendeesDto attendeesDto : dto.getListOfAttendees()) {
 			attendeesDto.setAttendeesId(sequenceNumberGen.getNextSeqNumber("A", 10, getSession()));
 		}
-		
 		getSession().persist(importDto(dto));
 		return expenseLineItemId;
 	}
