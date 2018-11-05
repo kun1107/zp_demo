@@ -45,7 +45,7 @@ public class TravelExpenseAttendeesDo implements BaseDo{
 	private Date date;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "EXPENSE_LINE_ITEM_ID", nullable = false, updatable = false)
+	@JoinColumn(name = "EXPENSE_LINE_ITEM_ID", nullable = true, updatable = true)
 	private TravelExpenseLineItemDetailsDo travelExpenseLineItemDetailsDo;
 	@Override
 	public Object getPrimaryKey() {

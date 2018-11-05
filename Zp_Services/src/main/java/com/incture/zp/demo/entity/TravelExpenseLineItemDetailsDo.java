@@ -76,7 +76,7 @@ public class TravelExpenseLineItemDetailsDo implements BaseDo {
 	@Column(name = "COMMENTS")
 	private String comments;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "travelExpenseLineItemDetailsDo")
+	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL,orphanRemoval = true,mappedBy = "travelExpenseLineItemDetailsDo")
 	private List<TravelExpenseAttendeesDo> listOfAttendees;
 	
 	@Override
