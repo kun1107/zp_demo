@@ -6,7 +6,6 @@ import java.util.List;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
-import com.incture.zp.demo.dto.TravelDto;
 import com.incture.zp.demo.dto.TravelExpenseAttendeesDto;
 import com.incture.zp.demo.dto.TravelExpenseLineItemDetailsDto;
 import com.incture.zp.demo.entity.TravelExpenseAttendeesDo;

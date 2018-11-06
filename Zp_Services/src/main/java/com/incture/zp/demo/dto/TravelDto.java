@@ -72,6 +72,8 @@ public class TravelDto extends BaseDto {
 	private String approverComment;
 	
 	private List<String> listOfLineItemId;
+	
+	private List<TravelExpenseLineItemDetailsDto> listOfLineItemDto;
 
 	@Override
 	public Object getPrimaryKey() {
