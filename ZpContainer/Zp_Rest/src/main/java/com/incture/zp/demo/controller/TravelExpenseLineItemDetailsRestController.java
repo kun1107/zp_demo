@@ -29,4 +29,14 @@ public class TravelExpenseLineItemDetailsRestController {
 	public ResponseDto getTravelById(@PathVariable("expenseLineItemId") String expenseLineItemId) {
 		return service.getExpenseLineItem(expenseLineItemId);
 	}
+	
+	@RequestMapping(value="{expenseLineItemId}", method = RequestMethod.DELETE)
+	public ResponseDto deleteLineItem(@PathVariable("expenseLineItemId") String expenseLineItemId) {
+		return service.deleteLineItem(expenseLineItemId);
+	}
+	
+	@RequestMapping(method = RequestMethod.PUT)
+	public ResponseDto updateLineItem(@RequestBody TravelExpenseLineItemDetailsDto dto){
+		return service.updateLineItem(dto);
+	}
 }

@@ -28,6 +28,7 @@ public class ExpenseDetailsDto extends BaseDto {
 	private String additionalInfo;	
 	private String lastApprover;
 	private List<String> listOfLineItemId;
+	private List<TravelExpenseLineItemDetailsDto> listOfLineItemDto;
 	
 	@Override
 	public Object getPrimaryKey() {

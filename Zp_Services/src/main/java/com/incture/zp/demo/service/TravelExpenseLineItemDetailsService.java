@@ -54,4 +54,38 @@ public class TravelExpenseLineItemDetailsService implements TravelExpenseLineIte
 		}
 		return responseDto;
 	}
+	
+	@Override
+	public ResponseDto deleteLineItem(String expenseLineItemId){
+		responseDto = new ResponseDto();
+		try {
+			dao.deleteExpenseLineItem(expenseLineItemId);
+			responseDto.setCode(200);
+			responseDto.setStatus(true);
+			responseDto.setMessage("Succcess");
+
+		} catch (Exception e) {
+			responseDto.setCode(500);
+			responseDto.setStatus(false);
+			responseDto.setMessage("failed due to: " + e.getMessage());
+		}
+		return responseDto;
+	}
+	
+	@Override
+	public ResponseDto updateLineItem(TravelExpenseLineItemDetailsDto dto){
+		responseDto = new ResponseDto();
+		try {
+			responseDto.setData(dao.updateLineItem(dto));
+			responseDto.setCode(200);
+			responseDto.setStatus(true);
+			responseDto.setMessage("Succcess");
+
+		} catch (Exception e) {
+			responseDto.setCode(500);
+			responseDto.setStatus(false);
+			responseDto.setMessage("failed due to: " + e.getMessage());
+		}
+		return responseDto;
+	}
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
+import com.incture.zp.demo.dto.TravelDto;
 import com.incture.zp.demo.dto.TravelExpenseAttendeesDto;
 import com.incture.zp.demo.dto.TravelExpenseLineItemDetailsDto;
 import com.incture.zp.demo.entity.TravelExpenseAttendeesDo;
@@ -126,5 +127,18 @@ public class TravelExpenseLineItemDetailsDao extends BaseDao<TravelExpenseLineIt
 		dto = exportDto((TravelExpenseLineItemDetailsDo) q.uniqueResult());
 
 		return dto;
+	}
+	
+	@Override
+	public void deleteExpenseLineItem(String expenseLineItemId) {
+		TravelExpenseLineItemDetailsDo entity = (TravelExpenseLineItemDetailsDo) getSession().get(TravelExpenseLineItemDetailsDo.class, expenseLineItemId);
+		getSession().delete(entity);
+	}
+	
+	@Override
+	public String updateLineItem(TravelExpenseLineItemDetailsDto dto){
+		String expenseLineItemId = dto.getExpenseLineItemId();
+		getSession().update(importDto(dto));
+		return expenseLineItemId;
 	}
 }

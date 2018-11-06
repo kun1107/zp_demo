@@ -9,4 +9,8 @@ public interface TravelExpenseLineItemDetailsServiceLocal {
 
 	ResponseDto getExpenseLineItem(String expenseLineItemId);
 
+	ResponseDto deleteLineItem(String expenseLineItemId);
+
+	ResponseDto updateLineItem(TravelExpenseLineItemDetailsDto dto);
+
 }

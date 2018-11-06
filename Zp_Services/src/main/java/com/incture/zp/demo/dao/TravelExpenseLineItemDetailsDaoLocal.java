@@ -8,4 +8,8 @@ public interface TravelExpenseLineItemDetailsDaoLocal {
 
 	TravelExpenseLineItemDetailsDto getExpenseLineItem(String expenseLineItemId);
 
+	void deleteExpenseLineItem(String expenseLineItemId);
+
+	String updateLineItem(TravelExpenseLineItemDetailsDto dto);
+
 }
