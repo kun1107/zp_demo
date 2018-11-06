@@ -119,11 +119,11 @@ public class TravelDao extends BaseDao<TravelDo, TravelDto> implements TravelDao
 		
 		//
 		
-		for ( String relId : dto.getListOfLineItemId()) {
+		for ( String lineItemId : dto.getListOfLineItemId()) {
 			relEntity = new LineItemRelDo();
 			
 			relEntity.setParentId(travelId);
-			relEntity.setRelId(relId);
+			relEntity.setLineItemId(lineItemId);
 			
 			relDao.createRelation(relEntity);
 		}

@@ -80,11 +80,11 @@ public class ExpenseDetailsDao extends BaseDao<ExpenseDetailsDo, ExpenseDetailsD
 		dto.setExpenseDetailId(expenseDetailId);
 		
 		
-		for ( String relId : dto.getListOfLineItemId()) {
+		for ( String lineItemId : dto.getListOfLineItemId()) {
 			relEntity = new LineItemRelDo();
 			
 			relEntity.setParentId(expenseDetailId);
-			relEntity.setRelId(relId);
+			relEntity.setLineItemId(lineItemId);;
 			
 			relDao.createRelation(relEntity);
 		}
