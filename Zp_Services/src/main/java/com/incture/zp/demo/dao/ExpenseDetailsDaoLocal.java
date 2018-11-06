@@ -2,6 +2,7 @@ package com.incture.zp.demo.dao;
 
 import java.util.List;
 
+import com.incture.zp.demo.dto.ExpenseApprovalDto;
 import com.incture.zp.demo.dto.ExpenseDetailsDto;
 import com.incture.zp.demo.entity.ExpenseDetailsDo;
 
@@ -16,5 +17,9 @@ public interface ExpenseDetailsDaoLocal {
 	List<ExpenseDetailsDto> getExpenseDetailByEmpId(String employeeId);
 
 	String createExpenseDetail(ExpenseDetailsDto dto);
+
+	String expenseApproval(ExpenseApprovalDto dto);
+
+	List<ExpenseDetailsDto> getPendingApprovals(String pendingWith);
 
 }

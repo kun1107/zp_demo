@@ -7,6 +7,7 @@ import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.incture.zp.demo.dto.ExpenseApprovalDto;
 import com.incture.zp.demo.dto.ExpenseDetailsDto;
 import com.incture.zp.demo.dto.TravelDto;
 import com.incture.zp.demo.entity.ExpenseDetailsDo;
@@ -131,6 +132,27 @@ public class ExpenseDetailsDao extends BaseDao<ExpenseDetailsDo, ExpenseDetailsD
 		q.setParameter("expenseDetailId", expenseDetailId);
 		dto = exportDto((ExpenseDetailsDo) q.uniqueResult());
 		return dto;
+	}
+
+	@Override
+	public String expenseApproval(ExpenseApprovalDto dto) {
+		
+		return "Success";
+	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<ExpenseDetailsDto> getPendingApprovals(String pendingWith) {
+		List<ExpenseDetailsDto> detailsDtos = new ArrayList<>();
+		List<ExpenseDetailsDo> detailsDos;
+		String query = "from ExpenseDetailsDo e where e.pendingWith=:pendingWith";
+		Query q = getSession().createQuery(query);
+		q.setParameter("pendingWith", pendingWith);
+		detailsDos = q.list();
+		for(ExpenseDetailsDo entity : detailsDos){
+			detailsDtos.add(exportDto(entity));
+		}
+		return detailsDtos;
 	}
 	
 }

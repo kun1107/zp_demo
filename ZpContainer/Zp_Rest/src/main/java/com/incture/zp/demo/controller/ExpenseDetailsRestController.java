@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.incture.zp.demo.dto.ExpenseApprovalDto;
 import com.incture.zp.demo.dto.ExpenseDetailsDto;
 import com.incture.zp.demo.dto.ResponseDto;
 import com.incture.zp.demo.service.ExpenseDetailsServiceLocal;
@@ -33,5 +34,15 @@ public class ExpenseDetailsRestController {
 	@RequestMapping(value="/getExpenseDetailByExpenseId/{expId}", method = RequestMethod.GET)
 	public ResponseDto getExpenseDetailByExpenseId(@PathVariable("expId") String expenseDetailId) {
 		return service.getExpenseDetailByExpenseId(expenseDetailId);
+	}
+	
+	@RequestMapping(value="/expenseApproval", method = RequestMethod.POST)
+	public ResponseDto expenseApproval(@RequestBody ExpenseApprovalDto dto) {
+		return service.expenseApproval(dto);
+	}
+	
+	@RequestMapping(value="/getPendingApprovals/{pendingWith}", method = RequestMethod.GET)
+	public ResponseDto getPendingApprovals(@PathVariable("pendingWith") String pendingWith) {
+		return service.getPendingApprovals(pendingWith);
 	}
 }
