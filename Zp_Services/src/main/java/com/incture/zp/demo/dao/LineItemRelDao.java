@@ -43,7 +43,7 @@ public class LineItemRelDao extends BaseDao<LineItemRelDo, LineItemRelDto> imple
 		sequenceNumberGen = SequenceNumberGen.getInstance();
 		String relId = sequenceNumberGen.getNextSeqNumber("R", 15, getSession());
 		
-		entity.setLineItemId(relId);
+		entity.setRelId(relId);
 		
 		getSession().persist(entity);
 		
