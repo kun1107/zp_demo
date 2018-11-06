@@ -57,6 +57,9 @@ public class ExpenseDetailsDo implements BaseDo{
 	@Column(name = "AMOUNT")
 	private BigDecimal amount;
 	
+	@Column(name = "LAST_APPROVER")
+	private String lastApprover;
+	
 	@Override
 	public Object getPrimaryKey() {
 		return expenseDetailId;

@@ -48,6 +48,7 @@ public class ExpenseDetailsDao extends BaseDao<ExpenseDetailsDo, ExpenseDetailsD
 		entity.setAdditionalInfo(dto.getAdditionalInfo());
 		entity.setTravelId(dto.getTravelId());
 		entity.setAmount(dto.getAmount());
+		entity.setLastApprover(dto.getLastApprover());
 		return entity;
 	}
 	
@@ -68,6 +69,7 @@ public class ExpenseDetailsDao extends BaseDao<ExpenseDetailsDo, ExpenseDetailsD
 		dto.setApprovalComment(entity.getApprovalComment());
 		dto.setTravelId(entity.getTravelId());
 		dto.setAmount(entity.getAmount());
+		dto.setLastApprover(entity.getLastApprover());
 		return dto;
 	}
 	
@@ -86,6 +88,8 @@ public class ExpenseDetailsDao extends BaseDao<ExpenseDetailsDo, ExpenseDetailsD
 			
 			relDao.createRelation(relEntity);
 		}
+		
+		dto = approval(dto);
 		
 		getSession().persist(importDto(dto));
 		return expenseDetailId;
@@ -117,8 +121,20 @@ public class ExpenseDetailsDao extends BaseDao<ExpenseDetailsDo, ExpenseDetailsD
 	
 	private ExpenseDetailsDto approval(ExpenseDetailsDto dto){
 		
-		if(dto.getTravelId()!=null){
-			
+		if(dto.getTravelId()!=null && !dto.getTravelId().isEmpty()){
+			travel = travelDao.getTravelById(dto.getTravelId());
+			if(travel!=null && travel.getCashAdvanceAmount().compareTo(dto.getAmount())!=0){
+				dto.setApprovalStatus("Pending");
+				dto.setPendingWith("APL8553");
+			}else{
+				dto.setLastApprover("System");
+				dto.setApprovalComment("Auto-Approved");
+				dto.setPendingWith(null);
+				dto.setApprovalStatus("Approved");
+			}
+		}else{
+			dto.setApprovalStatus("Pending");
+			dto.setPendingWith("APL8553");
 		}
 		
 		return dto;

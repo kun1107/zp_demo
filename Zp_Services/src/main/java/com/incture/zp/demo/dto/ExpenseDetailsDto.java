@@ -26,6 +26,7 @@ public class ExpenseDetailsDto extends BaseDto {
 	private String approvalStatus;
 	private String pendingWith;
 	private String additionalInfo;	
+	private String lastApprover;
 	private List<String> listOfLineItemId;
 	
 	@Override
