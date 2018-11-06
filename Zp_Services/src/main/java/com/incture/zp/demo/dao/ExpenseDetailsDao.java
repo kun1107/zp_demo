@@ -120,7 +120,9 @@ public class ExpenseDetailsDao extends BaseDao<ExpenseDetailsDo, ExpenseDetailsD
 		q.setParameter("employeeId", employeeId);
 		detailsDos = q.list();
 		for(ExpenseDetailsDo entity : detailsDos){
-			detailsDtos.add(exportDto(entity));
+			dto = exportDto(entity);
+			dto.setListOfLineItemDto(relDao.getListOfLineItems(entity.getExpenseDetailId()));
+			detailsDtos.add(dto);
 		}
 		return detailsDtos;
 	}
@@ -131,6 +133,7 @@ public class ExpenseDetailsDao extends BaseDao<ExpenseDetailsDo, ExpenseDetailsD
 		Query q = getSession().createQuery(query);
 		q.setParameter("expenseDetailId", expenseDetailId);
 		dto = exportDto((ExpenseDetailsDo) q.uniqueResult());
+		dto.setListOfLineItemDto(relDao.getListOfLineItems(expenseDetailId));
 		return dto;
 	}
 
@@ -150,7 +153,9 @@ public class ExpenseDetailsDao extends BaseDao<ExpenseDetailsDo, ExpenseDetailsD
 		q.setParameter("pendingWith", pendingWith);
 		detailsDos = q.list();
 		for(ExpenseDetailsDo entity : detailsDos){
-			detailsDtos.add(exportDto(entity));
+			dto = exportDto(entity);
+			dto.setListOfLineItemDto(relDao.getListOfLineItems(entity.getExpenseDetailId()));
+			detailsDtos.add(dto);
 		}
 		return detailsDtos;
 	}

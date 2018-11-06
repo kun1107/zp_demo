@@ -147,7 +147,7 @@ public class TravelDao extends BaseDao<TravelDo, TravelDto> implements TravelDao
 		q.setParameter("travelId", travelId);
 
 		dto = exportDto((TravelDo) q.uniqueResult());
-
+		dto.setListOfLineItemDto(relDao.getListOfLineItems(travelId));
 		return dto;
 	}
 
@@ -161,7 +161,9 @@ public class TravelDao extends BaseDao<TravelDo, TravelDto> implements TravelDao
 		q.setParameter("empId", empId);
 		travelDoList = q.list();
 		for (TravelDo t : travelDoList) {
-			travelDtoList.add(exportDto(t));
+			dto = exportDto(t);
+			dto.setListOfLineItemDto(relDao.getListOfLineItems(t.getTravelId()));
+			travelDtoList.add(dto);
 		}
 		return travelDtoList;
 	}
@@ -176,7 +178,9 @@ public class TravelDao extends BaseDao<TravelDo, TravelDto> implements TravelDao
 		q.setParameter("empId", empId);
 		travelDoList = q.list();
 		for (TravelDo t : travelDoList) {
-			travelDtoList.add(exportDto(t));
+			dto = exportDto(t);
+			dto.setListOfLineItemDto(relDao.getListOfLineItems(t.getTravelId()));
+			travelDtoList.add(dto);
 		}
 		return travelDtoList;
 	}
@@ -233,7 +237,9 @@ public class TravelDao extends BaseDao<TravelDo, TravelDto> implements TravelDao
 		q.setParameter("empId", empId);
 		travelDoList = q.list();
 		for (TravelDo t : travelDoList) {
-			travelDtoList.add(exportDto(t));
+			dto = exportDto(t);
+			dto.setListOfLineItemDto(relDao.getListOfLineItems(t.getTravelId()));
+			travelDtoList.add(dto);
 		}
 		return travelDtoList;
 	}
