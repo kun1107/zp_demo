@@ -40,7 +40,7 @@ public class ExpenseDetailsDao extends BaseDao<ExpenseDetailsDo, ExpenseDetailsD
 		entity.setPendingWith(dto.getPendingWith());
 		entity.setApprovalComment(dto.getApprovalComment());
 		entity.setAdditionalInfo(dto.getAdditionalInfo());
-		
+		entity.setTravelId(dto.getTravelId());
 		return entity;
 	}
 	
@@ -59,6 +59,7 @@ public class ExpenseDetailsDao extends BaseDao<ExpenseDetailsDo, ExpenseDetailsD
 		dto.setPendingWith(entity.getPendingWith());
 		dto.setAdditionalInfo(entity.getAdditionalInfo());
 		dto.setApprovalComment(entity.getApprovalComment());
+		dto.setTravelId(entity.getTravelId());
 		
 		return dto;
 	}

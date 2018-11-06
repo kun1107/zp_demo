@@ -13,6 +13,7 @@ import lombok.ToString;
 public class ExpenseDetailsDto extends BaseDto {
 
 	private String expenseDetailId;
+	private String travelId;
 	private String employeeId;
 	private String claimName;
 	private Date claimDate;
