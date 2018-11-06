@@ -1,5 +1,6 @@
 package com.incture.zp.demo.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -52,6 +53,9 @@ public class ExpenseDetailsDo implements BaseDo{
 	
 	@Column(name = "ADDITIONAL_INFORMATION")
 	private String additionalInfo;
+
+	@Column(name = "AMOUNT")
+	private BigDecimal amount;
 	
 	@Override
 	public Object getPrimaryKey() {

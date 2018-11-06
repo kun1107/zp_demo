@@ -1,5 +1,6 @@
 package com.incture.zp.demo.dto;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class ExpenseDetailsDto extends BaseDto {
 	private String costCenterName;
 	private String department;
 	private String comments;
+	private BigDecimal amount;
 	private String approvalComment;
 	private String approvalStatus;
 	private String pendingWith;

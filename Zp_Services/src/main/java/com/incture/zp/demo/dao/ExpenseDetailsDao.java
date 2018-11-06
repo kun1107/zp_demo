@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.incture.zp.demo.dto.ExpenseDetailsDto;
+import com.incture.zp.demo.dto.TravelDto;
 import com.incture.zp.demo.entity.ExpenseDetailsDo;
 import com.incture.zp.demo.entity.LineItemRelDo;
 import com.incture.zp.demo.util.SequenceNumberGen;
@@ -20,8 +21,13 @@ public class ExpenseDetailsDao extends BaseDao<ExpenseDetailsDo, ExpenseDetailsD
 	
 	private LineItemRelDo relEntity;
 	
+	private TravelDto travel;
+	
 	@Autowired
 	private LineItemRelDaoLocal relDao;
+	
+	@Autowired
+	private TravelDaoLocal travelDao;
 	
 	private SequenceNumberGen sequenceNumberGen;
 	
@@ -41,6 +47,7 @@ public class ExpenseDetailsDao extends BaseDao<ExpenseDetailsDo, ExpenseDetailsD
 		entity.setApprovalComment(dto.getApprovalComment());
 		entity.setAdditionalInfo(dto.getAdditionalInfo());
 		entity.setTravelId(dto.getTravelId());
+		entity.setAmount(dto.getAmount());
 		return entity;
 	}
 	
@@ -60,7 +67,7 @@ public class ExpenseDetailsDao extends BaseDao<ExpenseDetailsDo, ExpenseDetailsD
 		dto.setAdditionalInfo(entity.getAdditionalInfo());
 		dto.setApprovalComment(entity.getApprovalComment());
 		dto.setTravelId(entity.getTravelId());
-		
+		dto.setAmount(entity.getAmount());
 		return dto;
 	}
 	
@@ -105,6 +112,15 @@ public class ExpenseDetailsDao extends BaseDao<ExpenseDetailsDo, ExpenseDetailsD
 		Query q = getSession().createQuery(query);
 		q.setParameter("expenseDetailId", expenseDetailId);
 		dto = exportDto((ExpenseDetailsDo) q.uniqueResult());
+		return dto;
+	}
+	
+	private ExpenseDetailsDto approval(ExpenseDetailsDto dto){
+		
+		if(dto.getTravelId()!=null){
+			
+		}
+		
 		return dto;
 	}
 }
