@@ -132,6 +132,11 @@ public class TravelExpenseLineItemDetailsDao extends BaseDao<TravelExpenseLineIt
 	public void deleteExpenseLineItem(String expenseLineItemId) {
 		TravelExpenseLineItemDetailsDo entity = (TravelExpenseLineItemDetailsDo) getSession().get(TravelExpenseLineItemDetailsDo.class, expenseLineItemId);
 		getSession().delete(entity);
+		
+		String query = "delete from LineItemRelDo l where l.lineItemId=:lineItemId";
+		Query q = getSession().createQuery(query);
+		q.setParameter("lineItemId", expenseLineItemId);
+		q.executeUpdate();		
 	}
 	
 	@Override

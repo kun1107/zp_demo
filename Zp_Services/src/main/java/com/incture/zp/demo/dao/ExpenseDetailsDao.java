@@ -1,5 +1,6 @@
 package com.incture.zp.demo.dao;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.incture.zp.demo.dto.ExpenseApprovalDto;
 import com.incture.zp.demo.dto.ExpenseDetailsDto;
 import com.incture.zp.demo.dto.TravelDto;
+import com.incture.zp.demo.dto.TravelExpenseLineItemDetailsDto;
 import com.incture.zp.demo.entity.ExpenseDetailsDo;
 import com.incture.zp.demo.entity.LineItemRelDo;
 import com.incture.zp.demo.util.SequenceNumberGen;
@@ -138,11 +140,49 @@ public class ExpenseDetailsDao extends BaseDao<ExpenseDetailsDo, ExpenseDetailsD
 	}
 
 	@Override
-	public String expenseApproval(ExpenseApprovalDto dto) {
+	public String expenseApproval(ExpenseApprovalDto approvalDto) {
+		dto = getExpenseDetailByExpenseId(approvalDto.getExpenseDetailId());
+		
+		if(approvalDto.isApproved()){
+			if(dto.getPendingWith().equals("7760")){
+				dto.setLastApprover(approvalDto.getApprovedBy());
+				dto.setApprovalComment(approvalDto.getApproverComment());
+				dto.setPendingWith(null);
+				dto.setApprovalStatus("Approved");
+			}else{
+				if(lineItemCheck(dto)){
+					dto.setLastApprover(approvalDto.getApprovedBy());
+					dto.setApprovalComment(approvalDto.getApproverComment());
+					dto.setPendingWith("7760");
+					dto.setApprovalStatus("Approved");
+				}else{
+					dto.setLastApprover(approvalDto.getApprovedBy());
+					dto.setApprovalComment(approvalDto.getApproverComment());
+					dto.setPendingWith(null);
+					dto.setApprovalStatus("Approved");
+				}
+			}
+		}else {
+			dto.setLastApprover(approvalDto.getApprovedBy());
+			dto.setApprovalComment(approvalDto.getApproverComment());
+			dto.setPendingWith(null);
+			dto.setApprovalStatus("Rejected");
+		}
 		
 		return "Success";
 	}
 	
+	private boolean lineItemCheck(ExpenseDetailsDto expsenseDto) {
+		
+		List<TravelExpenseLineItemDetailsDto> list = expsenseDto.getListOfLineItemDto();
+		for (TravelExpenseLineItemDetailsDto travelExpenseLineItemDetailsDto : list) {
+			if(travelExpenseLineItemDetailsDto.getAmount().compareTo(new BigDecimal("200"))>0){
+				return true;
+			}
+		}
+		return false;
+	}
+
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<ExpenseDetailsDto> getPendingApprovals(String pendingWith) {

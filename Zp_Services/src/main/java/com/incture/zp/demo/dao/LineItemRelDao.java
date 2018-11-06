@@ -68,7 +68,7 @@ public class LineItemRelDao extends BaseDao<LineItemRelDo, LineItemRelDto> imple
 		q.setParameter("id", id);
 		relDo = q.list();
 		for(LineItemRelDo entity : relDo){
-			ids.add(entity.getRelId());
+			ids.add(entity.getLineItemId());
 		}
 		return ids;
 	}
