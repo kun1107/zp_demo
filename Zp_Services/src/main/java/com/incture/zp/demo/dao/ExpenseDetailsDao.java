@@ -141,33 +141,42 @@ public class ExpenseDetailsDao extends BaseDao<ExpenseDetailsDo, ExpenseDetailsD
 
 	@Override
 	public String expenseApproval(ExpenseApprovalDto approvalDto) {
-		dto = getExpenseDetailByExpenseId(approvalDto.getExpenseDetailId());
+		String query = "from ExpenseDetailsDo e where e.expenseDetailId=:expenseDetailId";
+		Query q = getSession().createQuery(query);
+		q.setParameter("expenseDetailId", approvalDto.getExpenseDetailId());
+		entity = (ExpenseDetailsDo) q.uniqueResult();
+		dto = exportDto(entity);
+		dto.setListOfLineItemDto(relDao.getListOfLineItems(approvalDto.getExpenseDetailId()));
+		
+		//dto = getExpenseDetailByExpenseId(approvalDto.getExpenseDetailId());
 		
 		if(approvalDto.isApproved()){
 			if(dto.getPendingWith().equals("7760")){
-				dto.setLastApprover(approvalDto.getApprovedBy());
-				dto.setApprovalComment(approvalDto.getApproverComment());
-				dto.setPendingWith(null);
-				dto.setApprovalStatus("Approved");
+				entity.setLastApprover(approvalDto.getApprovedBy());
+				entity.setApprovalComment(approvalDto.getApproverComment());
+				entity.setPendingWith(null);
+				entity.setApprovalStatus("Approved");
 			}else{
 				if(lineItemCheck(dto)){
-					dto.setLastApprover(approvalDto.getApprovedBy());
-					dto.setApprovalComment(approvalDto.getApproverComment());
-					dto.setPendingWith("7760");
-					dto.setApprovalStatus("Approved");
+					entity.setLastApprover(approvalDto.getApprovedBy());
+					entity.setApprovalComment(approvalDto.getApproverComment());
+					entity.setPendingWith("7760");
+					entity.setApprovalStatus("Approved");
 				}else{
-					dto.setLastApprover(approvalDto.getApprovedBy());
-					dto.setApprovalComment(approvalDto.getApproverComment());
-					dto.setPendingWith(null);
-					dto.setApprovalStatus("Approved");
+					entity.setLastApprover(approvalDto.getApprovedBy());
+					entity.setApprovalComment(approvalDto.getApproverComment());
+					entity.setPendingWith(null);
+					entity.setApprovalStatus("Approved");
 				}
 			}
 		}else {
-			dto.setLastApprover(approvalDto.getApprovedBy());
-			dto.setApprovalComment(approvalDto.getApproverComment());
-			dto.setPendingWith(null);
-			dto.setApprovalStatus("Rejected");
+			entity.setLastApprover(approvalDto.getApprovedBy());
+			entity.setApprovalComment(approvalDto.getApproverComment());
+			entity.setPendingWith(null);
+			entity.setApprovalStatus("Rejected");
 		}
+		
+		getSession().update(entity);
 		
 		return "Success";
 	}
@@ -175,6 +184,8 @@ public class ExpenseDetailsDao extends BaseDao<ExpenseDetailsDo, ExpenseDetailsD
 	private boolean lineItemCheck(ExpenseDetailsDto expsenseDto) {
 		
 		List<TravelExpenseLineItemDetailsDto> list = expsenseDto.getListOfLineItemDto();
+		
+		if(list!=null)
 		for (TravelExpenseLineItemDetailsDto travelExpenseLineItemDetailsDto : list) {
 			if(travelExpenseLineItemDetailsDto.getAmount().compareTo(new BigDecimal("200"))>0){
 				return true;
