@@ -54,6 +54,7 @@ public class TravelExpenseLineItemDetailsDao extends BaseDao<TravelExpenseLineIt
 			attendeesDo.setDepartment(attendeesDto.getDepartment());
 			attendeesDo.setName(attendeesDto.getName());
 			attendeesDo.setAmount(dto.getAmount());
+			attendeesDo.setTravelExpenseLineItemDetailsDo(entity);
 			
 			listOfAttendees.add(attendeesDo);
 		}
