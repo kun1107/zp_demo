@@ -123,7 +123,10 @@ public class TravelExpenseLineItemDetailsDao extends BaseDao<TravelExpenseLineIt
 
 		q.setParameter("expenseLineItemId", expenseLineItemId);
 
-		dto = exportDto((TravelExpenseLineItemDetailsDo) q.uniqueResult());
+		entity = (TravelExpenseLineItemDetailsDo) q.uniqueResult();
+		
+		if(entity!=null)
+		dto = exportDto(entity);
 
 		return dto;
 	}
