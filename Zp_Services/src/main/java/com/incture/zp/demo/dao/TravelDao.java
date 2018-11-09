@@ -108,7 +108,7 @@ public class TravelDao extends BaseDao<TravelDo, TravelDto> implements TravelDao
 	@Override
 	public String createTravel(TravelDto dto) {
 		sequenceNumberGen = SequenceNumberGen.getInstance();
-		String travelId = sequenceNumberGen.getNextSeqNumber("T", 10, getSession());
+		String travelId = sequenceNumberGen.getNextSeqNumber("TR"+sequenceNumberGen.getString()+"-", 6, getSession());
 		dto.setTravelId(travelId);
 
 		// should be replaced by workflow

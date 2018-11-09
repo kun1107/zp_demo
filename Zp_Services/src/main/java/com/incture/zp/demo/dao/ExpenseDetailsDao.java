@@ -80,7 +80,7 @@ public class ExpenseDetailsDao extends BaseDao<ExpenseDetailsDo, ExpenseDetailsD
 	@Override
 	public String createExpenseDetail(ExpenseDetailsDto dto){
 		sequenceNumberGen = SequenceNumberGen.getInstance();
-		String expenseDetailId = sequenceNumberGen.getNextSeqNumber("E", 10, getSession());
+		String expenseDetailId = sequenceNumberGen.getNextSeqNumber("EX"+sequenceNumberGen.getString()+"-", 6, getSession());
 		dto.setExpenseDetailId(expenseDetailId);
 		
 		

@@ -1,5 +1,8 @@
 package com.incture.zp.demo.util;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -92,5 +95,11 @@ public class SequenceNumberGen {
 			runningnumber = retDto1.getRunningNumber();
 		}
 		return runningnumber;
+	}
+	
+	public String getString(){
+		Date currentDate = new Date();
+		SimpleDateFormat df = new SimpleDateFormat("ddMMyyyy");
+		return df.format(currentDate);
 	}
 }
