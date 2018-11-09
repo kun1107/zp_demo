@@ -1,5 +1,6 @@
 package com.incture.zp.demo.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.incture.zp.demo.dto.ApprovalDto;
@@ -20,5 +21,7 @@ public interface TravelDaoLocal {
 	String approval(ApprovalDto dto);
 
 	List<TravelDto> getApprovedTravels(String empId);
+
+	List<TravelDto> getTravelsByBrandName(String brandName, Date startDate, Date endDate);
 
 }

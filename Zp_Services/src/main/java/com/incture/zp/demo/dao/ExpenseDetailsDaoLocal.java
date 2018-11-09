@@ -26,6 +26,6 @@ public interface ExpenseDetailsDaoLocal {
 
 	List<ExpenseDetailsDto> getCostCentreStats(String costCenterName, Date startDate, Date endDate);
 
-	List<BrandPromotionReporttDto> getBrandPromotionReport(String brandName, Date startDate, Date endDate);
+	BrandPromotionReporttDto getBrandPromotionReport(String brandName, Date startDate, Date endDate);
 
 }

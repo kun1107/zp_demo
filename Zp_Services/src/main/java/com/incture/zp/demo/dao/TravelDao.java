@@ -2,6 +2,7 @@ package com.incture.zp.demo.dao;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -235,6 +236,26 @@ public class TravelDao extends BaseDao<TravelDo, TravelDto> implements TravelDao
 		String query = "from TravelDo t where t.employeeId=:empId and t.approvalStatus = 'Approved'";
 		Query q = getSession().createQuery(query);
 		q.setParameter("empId", empId);
+		travelDoList = q.list();
+		for (TravelDo t : travelDoList) {
+			dto = exportDto(t);
+			dto.setListOfLineItemDto(relDao.getListOfLineItems(t.getTravelId()));
+			travelDtoList.add(dto);
+		}
+		return travelDtoList;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TravelDto> getTravelsByBrandName(String brandName, Date startDate, Date endDate) {
+		List<TravelDto> travelDtoList = new ArrayList<>();
+		List<TravelDo> travelDoList;
+		String query = "from TravelDo t where t.projectName=:brandName and t.startDate >= :startDate and t.startDate <= :endDate";
+		Query q = getSession().createQuery(query);
+		q.setParameter("brandName", brandName);
+		q.setParameter("startDate", startDate);
+		q.setParameter("endDate", endDate);
+		
 		travelDoList = q.list();
 		for (TravelDo t : travelDoList) {
 			dto = exportDto(t);
