@@ -128,7 +128,7 @@ public class TravelDao extends BaseDao<TravelDo, TravelDto> implements TravelDao
 			
 			relDao.createRelation(relEntity);
 		}
-		getSession().persist(importDto(dto));
+		getSession().saveOrUpdate(importDto(dto));
 
 		return travelId;
 	}

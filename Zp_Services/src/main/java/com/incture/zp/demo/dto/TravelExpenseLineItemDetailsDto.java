@@ -42,6 +42,8 @@ public class TravelExpenseLineItemDetailsDto extends BaseDto {
 	private String costCentreName;
 
 	private BigDecimal approvedAmount;
+	
+	private String approvedAmountCurrency;
 
 	private String comments;
 

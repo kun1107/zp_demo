@@ -111,7 +111,7 @@ public class ExpenseDetailsDao extends BaseDao<ExpenseDetailsDo, ExpenseDetailsD
 			dto.setPendingWith("APL8553");
 		}
 
-		getSession().persist(importDto(dto));
+		getSession().saveOrUpdate(importDto(dto));
 		return expenseDetailId;
 	}
 

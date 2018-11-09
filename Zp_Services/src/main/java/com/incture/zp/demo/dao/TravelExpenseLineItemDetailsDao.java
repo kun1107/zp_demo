@@ -29,6 +29,7 @@ public class TravelExpenseLineItemDetailsDao extends BaseDao<TravelExpenseLineIt
 		entity.setAmount(dto.getAmount());
 		entity.setAmountCurrency(dto.getAmountCurrency());
 		entity.setApprovedAmount(dto.getApprovedAmount());
+		entity.setApprovedAmountCurrency(dto.getApprovedAmountCurrency());
 		entity.setBusinessPurpose(dto.getBusinessPurpose());
 		entity.setComments(dto.getComments());
 		entity.setCostCentreName(dto.getCostCentreName());
@@ -70,6 +71,7 @@ public class TravelExpenseLineItemDetailsDao extends BaseDao<TravelExpenseLineIt
 		dto.setAmount(entity.getAmount());
 		dto.setAmountCurrency(entity.getAmountCurrency());
 		dto.setApprovedAmount(entity.getApprovedAmount());
+		dto.setApprovedAmountCurrency(entity.getApprovedAmountCurrency());
 		dto.setBusinessPurpose(entity.getBusinessPurpose());
 		dto.setComments(entity.getComments());
 		dto.setCostCentreName(entity.getCostCentreName());

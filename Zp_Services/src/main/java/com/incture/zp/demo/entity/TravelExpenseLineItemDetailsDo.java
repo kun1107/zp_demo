@@ -73,6 +73,9 @@ public class TravelExpenseLineItemDetailsDo implements BaseDo {
 	@Column(name = "APPROVED_AMOUNT")
 	private BigDecimal approvedAmount;
 	
+	@Column(name = "APPROVED_AMOUNT_CURRENCY")
+	private String approvedAmountCurrency;
+	
 	@Column(name = "COMMENTS")
 	private String comments;
 	
