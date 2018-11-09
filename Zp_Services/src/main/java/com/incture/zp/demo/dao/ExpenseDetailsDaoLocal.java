@@ -1,5 +1,6 @@
 package com.incture.zp.demo.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.incture.zp.demo.dto.ExpenseApprovalDto;
@@ -21,5 +22,7 @@ public interface ExpenseDetailsDaoLocal {
 	String expenseApproval(ExpenseApprovalDto dto);
 
 	List<ExpenseDetailsDto> getPendingApprovals(String pendingWith);
+
+	List<ExpenseDetailsDto> getCostCentreStats(String costCenterName, Date startDate, Date endDate);
 
 }

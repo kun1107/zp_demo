@@ -1,5 +1,7 @@
 package com.incture.zp.demo.service;
 
+import java.util.Date;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,6 +94,23 @@ public class ExpenseDetailsService implements ExpenseDetailsServiceLocal{
 		responseDto = new ResponseDto();
 		try {
 			responseDto.setData(dao.getPendingApprovals(pendingWith));
+			responseDto.setCode(200);
+			responseDto.setStatus(true);
+			responseDto.setMessage("Succcess");
+
+		} catch (Exception e) {
+			responseDto.setCode(500);
+			responseDto.setStatus(false);
+			responseDto.setMessage("failed due to: " + e.getMessage());
+		}
+		return responseDto;
+	}
+
+	@Override
+	public ResponseDto getCostCentreStats(String costCenterName, Date startDate, Date endDate) {
+		responseDto = new ResponseDto();
+		try {
+			responseDto.setData(dao.getCostCentreStats(costCenterName,startDate,endDate));
 			responseDto.setCode(200);
 			responseDto.setStatus(true);
 			responseDto.setMessage("Succcess");

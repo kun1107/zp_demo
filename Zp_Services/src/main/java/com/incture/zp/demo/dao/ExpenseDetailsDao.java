@@ -2,6 +2,7 @@ package com.incture.zp.demo.dao;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -202,6 +203,28 @@ public class ExpenseDetailsDao extends BaseDao<ExpenseDetailsDo, ExpenseDetailsD
 		String query = "from ExpenseDetailsDo e where e.pendingWith=:pendingWith";
 		Query q = getSession().createQuery(query);
 		q.setParameter("pendingWith", pendingWith);
+		detailsDos = q.list();
+		for(ExpenseDetailsDo entity : detailsDos){
+			dto = exportDto(entity);
+			dto.setListOfLineItemDto(relDao.getListOfLineItems(entity.getExpenseDetailId()));
+			detailsDtos.add(dto);
+		}
+		return detailsDtos;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ExpenseDetailsDto> getCostCentreStats(String costCenterName, Date startDate, Date endDate) {
+		
+		List<ExpenseDetailsDto> detailsDtos = new ArrayList<>();
+		List<ExpenseDetailsDo> detailsDos;
+		
+		String query = "from ExpenseDetailsDo e where e.costCenterName=:costCenterName and e.claimDate between :startDate and :endDate";
+		Query q = getSession().createQuery(query);
+		q.setParameter("costCenterName", costCenterName);
+		q.setParameter("startDate", startDate);
+		q.setParameter("endDate", endDate);
+		
 		detailsDos = q.list();
 		for(ExpenseDetailsDo entity : detailsDos){
 			dto = exportDto(entity);
