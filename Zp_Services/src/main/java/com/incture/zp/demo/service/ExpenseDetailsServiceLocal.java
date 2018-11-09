@@ -20,4 +20,6 @@ public interface ExpenseDetailsServiceLocal {
 
 	ResponseDto getCostCentreStats(String costCenterName, Date startDate, Date endDate);
 
+	ResponseDto getBrandPromotionReport(String brandName, Date startDate, Date endDate);
+
 }

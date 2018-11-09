@@ -122,4 +122,21 @@ public class ExpenseDetailsService implements ExpenseDetailsServiceLocal{
 		}
 		return responseDto;
 	}
+
+	@Override
+	public ResponseDto getBrandPromotionReport(String brandName, Date startDate, Date endDate) {
+		responseDto = new ResponseDto();
+		try {
+			responseDto.setData(dao.getBrandPromotionReport(brandName,startDate,endDate));
+			responseDto.setCode(200);
+			responseDto.setStatus(true);
+			responseDto.setMessage("Succcess");
+
+		} catch (Exception e) {
+			responseDto.setCode(500);
+			responseDto.setStatus(false);
+			responseDto.setMessage("failed due to: " + e.getMessage());
+		}
+		return responseDto;
+	}
 }

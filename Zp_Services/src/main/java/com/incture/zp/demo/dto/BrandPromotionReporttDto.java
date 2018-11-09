@@ -1,6 +1,6 @@
 package com.incture.zp.demo.dto;
 
-import java.util.Date;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -12,10 +12,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class ReportRequestDto {
-
-	private String costCenterName;
-	private Date startDate;
-	private Date endDate;
-	private String brandName;
+public class BrandPromotionReporttDto {
+	private List<ExpenseDetailsDto> listOfExpense;
+	private List<TravelDto> listOfTravels;
 }

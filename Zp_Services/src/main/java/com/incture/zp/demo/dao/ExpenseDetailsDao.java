@@ -9,6 +9,7 @@ import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.incture.zp.demo.dto.BrandPromotionReporttDto;
 import com.incture.zp.demo.dto.ExpenseApprovalDto;
 import com.incture.zp.demo.dto.ExpenseDetailsDto;
 import com.incture.zp.demo.dto.TravelDto;
@@ -232,6 +233,12 @@ public class ExpenseDetailsDao extends BaseDao<ExpenseDetailsDo, ExpenseDetailsD
 			detailsDtos.add(dto);
 		}
 		return detailsDtos;
+	}
+
+	@Override
+	public List<BrandPromotionReporttDto> getBrandPromotionReport(String brandName, Date startDate, Date endDate) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

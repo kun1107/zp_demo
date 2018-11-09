@@ -23,4 +23,10 @@ public class ReportRestController {
 	public ResponseDto getCostCentreStats(@RequestBody ReportRequestDto dto) {
 		return service.getCostCentreStats(dto.getCostCenterName(),dto.getStartDate(),dto.getEndDate());
 	}
+	
+	@RequestMapping(value = "/brandPromotionReport", method = RequestMethod.POST)
+	public ResponseDto brandPromotionReport(@RequestBody ReportRequestDto dto) {
+		return service.getBrandPromotionReport(dto.getBrandName(),dto.getStartDate(),dto.getEndDate());
+	}
+	
 }

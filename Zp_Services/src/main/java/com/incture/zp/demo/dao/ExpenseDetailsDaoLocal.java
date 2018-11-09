@@ -3,6 +3,7 @@ package com.incture.zp.demo.dao;
 import java.util.Date;
 import java.util.List;
 
+import com.incture.zp.demo.dto.BrandPromotionReporttDto;
 import com.incture.zp.demo.dto.ExpenseApprovalDto;
 import com.incture.zp.demo.dto.ExpenseDetailsDto;
 import com.incture.zp.demo.entity.ExpenseDetailsDo;
@@ -24,5 +25,7 @@ public interface ExpenseDetailsDaoLocal {
 	List<ExpenseDetailsDto> getPendingApprovals(String pendingWith);
 
 	List<ExpenseDetailsDto> getCostCentreStats(String costCenterName, Date startDate, Date endDate);
+
+	List<BrandPromotionReporttDto> getBrandPromotionReport(String brandName, Date startDate, Date endDate);
 
 }
